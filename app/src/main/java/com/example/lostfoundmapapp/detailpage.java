@@ -26,8 +26,7 @@ public class detailpage extends AppCompatActivity {
         textname = findViewById(R.id.textname);
         textlocation = findViewById(R.id.textlocation);
         delete = findViewById(R.id.removebtn);
-        tlat = findViewById(R.id.textView7);
-        tlng = findViewById(R.id.textView9);
+
         getandsetData();
 
         //Set on click to delete button
@@ -59,8 +58,7 @@ public class detailpage extends AppCompatActivity {
             textitem.setText(item);
             textname.setText(name);
             textlocation.setText(location);
-            tlat.setText(lat);
-            tlng.setText(lng);
+
 
         } else {
             Toast.makeText(this, "No data.", Toast.LENGTH_SHORT).show();

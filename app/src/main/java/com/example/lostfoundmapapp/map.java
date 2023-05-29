@@ -28,6 +28,7 @@ import java.util.ArrayList;
 
 public class map extends AppCompatActivity implements OnMapReadyCallback {
 
+    //Declare variables
     private GoogleMap map;
     FusedLocationProviderClient fusedLocationProviderClient;
     MyDatabase myDatabase;
@@ -39,6 +40,7 @@ public class map extends AppCompatActivity implements OnMapReadyCallback {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
 
+        //Match IDs
         myDatabase = new MyDatabase(getApplicationContext());
         id = new ArrayList<>();
         status = new ArrayList<>();
@@ -58,7 +60,7 @@ public class map extends AppCompatActivity implements OnMapReadyCallback {
         mapFragment.getMapAsync(this);
 
     }
-
+    //Add multiple marker
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         map = googleMap;

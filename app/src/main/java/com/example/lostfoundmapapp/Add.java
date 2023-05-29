@@ -51,8 +51,8 @@ public class Add extends AppCompatActivity implements LocationListener {
     double lng;
     String strlat = "";
     String strlng = "";
-    TextView test;
-    Button convert;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,37 +69,15 @@ public class Add extends AppCompatActivity implements LocationListener {
         add = findViewById(R.id.addbtn);
         radioGroup = findViewById(R.id.radioGroup);
         button_location = findViewById(R.id.locationbutton);
-        test = findViewById(R.id.textView5);
-        convert = findViewById(R.id.button);
 
+
+        //Ask permission
         if (ContextCompat.checkSelfPermission(Add.this, android.Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(Add.this,new String[]{
                     Manifest.permission.ACCESS_FINE_LOCATION},100);
         }
 
-        convert.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Geocoder geocoder = new Geocoder(getApplicationContext());
-                List<Address> addressList;
-                try {
-                    addressList = geocoder.getFromLocationName(locationinput.getText().toString(),1);
 
-                    if (addressList != null){
-                        lat = addressList.get(0).getLatitude();
-                        lng = addressList.get(0).getLongitude();
-
-                        test.setText("Lat="+String.valueOf(lat)+" | "+"Long="+String.valueOf(lng));
-
-                        strlat = String.valueOf(lat);
-                        strlng = String.valueOf(lng);
-                    }
-
-                }catch (IOException e){
-                    e.printStackTrace();
-                }
-            }
-        });
 
 
         button_location.setOnClickListener(new View.OnClickListener() {
@@ -124,6 +102,7 @@ public class Add extends AppCompatActivity implements LocationListener {
                 }
             }
         });
+        //Set on click to edittext
         locationinput.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -139,6 +118,7 @@ public class Add extends AppCompatActivity implements LocationListener {
             @Override
             public void onClick(View view) {
 
+                //Convert address to Latitude and Longitude and convert them to string
                 Geocoder geocoder = new Geocoder(getApplicationContext());
                 List<Address> addressList;
                 try {
@@ -147,8 +127,6 @@ public class Add extends AppCompatActivity implements LocationListener {
                     if (addressList != null){
                         lat = addressList.get(0).getLatitude();
                         lng = addressList.get(0).getLongitude();
-
-
 
                         strlat = String.valueOf(lat);
                         strlng = String.valueOf(lng);
@@ -171,6 +149,7 @@ public class Add extends AppCompatActivity implements LocationListener {
         });
     }
 
+    //get current location
     @SuppressLint("MissingPermission")
     private void getLocation() {
         try {
@@ -182,6 +161,7 @@ public class Add extends AppCompatActivity implements LocationListener {
         }
     }
 
+    //Place autocomplete
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 100 && resultCode == RESULT_OK){
@@ -196,9 +176,10 @@ public class Add extends AppCompatActivity implements LocationListener {
 
     }
 
+    //Add search bar to application
     @Override
     public void onLocationChanged(@NonNull Location location) {
-        Toast.makeText(this, ""+location.getLatitude()+","+location.getLongitude(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, ""+location.getLatitude()+","+location.getLongitude(), Toast.LENGTH_SHORT).show();
         try {
             Geocoder geocoder = new Geocoder(Add.this, Locale.getDefault());
             List<Address> addresses = geocoder.getFromLocation(location.getLatitude(),location.getLongitude(),1);

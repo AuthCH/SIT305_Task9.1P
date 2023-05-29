@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        //set on click to map button
         map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
